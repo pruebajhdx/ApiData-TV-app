@@ -9,6 +9,7 @@ class Server {
         this.port = process.env.PORT;
         this.streaming = '/api/streaming';
         this.channel = '/api/channel'
+        this.search = '/api/search'
         this.middlewares();
         this.routes();
     }
@@ -21,6 +22,7 @@ class Server {
     routes(){
         this.app.use(this.streaming, require('../routers/streaming'));
         this.app.use(this.channel, require('../routers/channel'))
+        this.app.use(this.search, require('../routers/search'))
     }
 
     listen(){

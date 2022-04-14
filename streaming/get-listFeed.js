@@ -3,6 +3,8 @@ const { getReplays } = require('./get-streamingReplays');
 const { getIframe } = require('../helpers/get-iframe');
 const { getData } = require('../helpers/get-information');
 
+//Get information F1, FOTBALL AND MOTOGP
+
 const getListFeed = async( url ) => {
     try {
         let count = 0
@@ -17,7 +19,7 @@ const getListFeed = async( url ) => {
                 listObj.push({
                     id         :  count - 1,
                     eventTime  : $(value).find('.matchtime').text(),
-                    eventTitle : $(value).find('.event-title').text().replace(/(\r\n|\n|\r)/gm, " "),
+                    name : $(value).find('.event-title').text().replace(/(\r\n|\n|\r)/gm, " "),
                     imgTitle   : $(value).children('td').children('img').attr('src'),
                     nameLinks  : $(valueSelector).text(),
                     eventLinks : $(valueSelector).attr('href')
