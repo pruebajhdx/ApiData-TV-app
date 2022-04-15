@@ -1,14 +1,14 @@
 const { Router } = require('express');
 const { getListChannel, getChannelLink } = require('../channel/get-list-channel');
+const { urlChannels } = require('../constants');
 
 
 const router = Router();
-const urlChannel = process.env.URL_CHANNEL
 
 router.get('/', async( req, res) => {
 
     try {
-        const data = await getListChannel(urlChannel)
+        const data = await getListChannel(urlChannels)
         return res.status(200).json({
             result: data
         });

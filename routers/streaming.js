@@ -16,11 +16,9 @@ const router = Router();
 router.get('/football', async(req, res) => {
     try {
         const data = await getListFeed(urlFootball);
-        if (data ) {
-            return res.status(200).json({
-                result: data,
-            });     
-        };
+        return res.status(200).json({
+            result: data,
+        });     
     } catch (error) {
         return res.status(500).json({
             error: error.toString()

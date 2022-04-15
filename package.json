@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "app": "nodemon app.js"
+    "test": "npx jest --detectOpenHandles --forceExit",
+    "dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",

@@ -5,6 +5,7 @@ const urlMMA = process.env.URL_MMA
 const urlNBA = process.env.URL_NBA
 const urlBoxing = process.env.URL_BOXING
 const urlBaseball = process.env.URL_BASEBALL 
+const urlChannels = process.env.URL_CHANNEL
 
 module.exports = {
     urlFootball,
@@ -13,5 +14,6 @@ module.exports = {
     urlMMA,
     urlNBA,
     urlBoxing,
-    urlBaseball
+    urlBaseball,
+    urlChannels
 }
