@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const { getListSports } = require('../streaming/get-list-sport');
-const { dataStreaming, getListFeed, dataReplay } = require('../streaming/get-listFeed');
+const { dataStreaming, getListFeed, dataReplay, filterByLeagues } = require('../streaming/get-listFeed');
 const { getListMma, getIframeUfc } = require('../streaming/get-mma');
 const { getIframeSports } = require('../streaming/get-list-sport');
 const { urlFootball, 
@@ -25,6 +25,20 @@ router.get('/football', async(req, res) => {
         });
     };
 });
+
+router.get('/league', async(req, res) => {
+    try {
+        const data = await filterByLeagues(urlFootball);
+        return res.status(200).json({
+            leagueAvailable : data
+        })
+        
+    } catch (error) {
+        return res.status(500).json({
+            error: error.toString()
+        })
+    }
+})
 
 router.get('/football/:id', async(req, res) => {
     try {

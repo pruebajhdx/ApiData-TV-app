@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { getListChannel } = require('../channel/get-list-channel');
 const { urlFootball, urlChannels} = require('../constants');
-const { searchWord, searchObjectDict } = require('../helpers/search');
+const { searchWord, searchObjectDict, searchByLeague } = require('../helpers/search');
 const { getListFeed } = require('../streaming/get-listFeed');
 
 const router = Router();
@@ -42,5 +42,22 @@ router.get('/channels/:keyword', async(req, res) => {
         });
     }
 });
+
+router.get('/leagues/:keyword', async(req, res) => {
+    try {
+        const word = req.params.keyword
+        let result = await searchByLeague(word, urlFootball)
+        
+        return res.status(200).json({
+            result
+        });
+        
+    } catch (error) {
+        return res.status(500).json({
+            error: error.toString()
+        });
+    }
+});
+
 
 module.exports = router

@@ -1,3 +1,4 @@
+const { filterByLeagues, getListFeed } = require("../streaming/get-listFeed");
 
 const searchWord = async(word, data) => {
     const filterDataSearch = data.filter(values => {
@@ -19,7 +20,21 @@ const searchObjectDict = async(word, data) => {
     return dataDict;
 }
 
+const searchByLeague = async(word, data) => {
+    const result = []
+    const listAllEvent = await getListFeed(data); 
+    const filterLeague = await filterByLeagues(data);
+    
+    listAllEvent.filter( (value) => {
+        if( filterLeague[word] == value.imgTitle){
+            result.push(value)
+        }
+    })
+    return result;
+}
+
 module.exports = {
     searchWord,
-    searchObjectDict
+    searchObjectDict,
+    searchByLeague
 }

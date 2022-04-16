@@ -43,8 +43,40 @@ const dataReplay = async( data ) => {
     return dataReplay;
 }
 
+const filterByLeagues = async(data) => {
+
+    const key = [];
+    const value = []
+    const dict = {}
+    
+    const listMatchesFootball = await getListFeed(data);
+    Object.entries(listMatchesFootball).forEach( (idx) => {
+        let formatData = idx[1].imgTitle.split('/');
+        formatData = formatData[7].split('.').slice(0, 1).join();
+        key.push(formatData);
+        if(key.includes(formatData)){
+            value.push(idx[1].imgTitle.toString());
+        }
+    })
+
+    const removingDuplicatesKey = key.filter((item,index)=>{
+        return key.indexOf(item) === index;
+    });
+
+    const removingDuplicatesValue = value.filter((item,index)=>{
+        return value.indexOf(item) === index;
+    });
+
+    for (let i in removingDuplicatesKey) {
+        dict[removingDuplicatesKey[i]] = removingDuplicatesValue[i]
+    }
+    
+    return dict
+}
+
 module.exports = {
     dataStreaming,
     dataReplay,
-    getListFeed
+    getListFeed,
+    filterByLeagues
 }
