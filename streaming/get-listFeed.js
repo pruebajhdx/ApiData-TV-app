@@ -6,15 +6,15 @@ const { getData } = require('../helpers/get-information');
 //Get information F1, FOTBALL AND MOTOGP
 
 const getListFeed = async( url ) => {
-    let count = 0
-    const data = await getData(url).then(dataHtml => dataHtml.data)
-    const $ = cheerio.load(data)
-    const objSelector = $('#myTable > tr')
-    const listObj = []
+    let count = 0;
+    const data = await getData(url).then(dataHtml => dataHtml.data);
+    const $ = cheerio.load(data);
+    const objSelector = $('#myTable > tr');
+    const listObj = [];
 
     objSelector.each( ( parentIdObject, value) => {
         $(value).children('td').children('a').each( (parentTdObject, valueSelector) => {
-            count += 1
+            count += 1;
             listObj.push({
                 id         :  count - 1,
                 eventTime  : $(value).find('.matchtime').text(),
@@ -23,31 +23,30 @@ const getListFeed = async( url ) => {
                 nameLinks  : $(valueSelector).text(),
                 eventLinks : $(valueSelector).attr('href')
             });
-            return
         });
       
     });
     return listObj;
-}
+};
 
 const dataStreaming = async( idx, data ) => {
     const listFeed = await getListFeed(data);
     const dataStreaming = await getIframe(idx, listFeed);
     return dataStreaming;
 
-}
+};
 
 const dataReplay = async( data ) => {
     const listReplay = await getListFeed(data);
     const dataReplay = await getReplays(listReplay);
     return dataReplay;
-}
+};
 
 const filterByLeagues = async(data) => {
 
     const key = [];
-    const value = []
-    const dict = {}
+    const value = [];
+    const dict = {};
     
     const listMatchesFootball = await getListFeed(data);
     Object.entries(listMatchesFootball).forEach( (idx) => {
@@ -57,7 +56,7 @@ const filterByLeagues = async(data) => {
         if(key.includes(formatData)){
             value.push(idx[1].imgTitle.toString());
         }
-    })
+    });
 
     const removingDuplicatesKey = key.filter((item,index)=>{
         return key.indexOf(item) === index;
@@ -68,11 +67,11 @@ const filterByLeagues = async(data) => {
     });
 
     for (let i in removingDuplicatesKey) {
-        dict[removingDuplicatesKey[i]] = removingDuplicatesValue[i]
+        dict[removingDuplicatesKey[i]] = removingDuplicatesValue[i];
     }
     
-    return dict
-}
+    return dict;
+};
 
 module.exports = {
     dataStreaming,
