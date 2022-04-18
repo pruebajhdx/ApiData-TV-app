@@ -55,13 +55,15 @@ const filterByLeagues = async(data) => {
     const dict = {};
     
     const listMatchesFootball = await getListFeed(data);
-    Object.entries(listMatchesFootball).forEach( (idx) => {
-        let formatData = idx[1].imgTitle.split('/');
-        formatData = formatData[7].split('.').slice(0, 1).join();
-        key.push(formatData);
-        if(key.includes(formatData)){
-            value.push(idx[1].imgTitle.toString());
-        }
+     Object.entries(listMatchesFootball).forEach( (idx) => {
+         if (idx[1].imgTitle != undefined){
+             let formatData = idx[1].imgTitle?.split('/');
+             formatData = formatData[7].split('.').slice(0, 1).join();
+             key.push(formatData);
+             if(key.includes(formatData)){
+                 value.push(idx[1].imgTitle.toString());
+             }
+         }
     });
 
     const removingDuplicatesKey = key.filter((item,index)=>{
@@ -74,7 +76,8 @@ const filterByLeagues = async(data) => {
 
     for (let i in removingDuplicatesKey) {
         dict[removingDuplicatesKey[i]] = removingDuplicatesValue[i];
-    }
+    } 
+
     
     return dict;
 };

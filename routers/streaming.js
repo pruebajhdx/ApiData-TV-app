@@ -35,7 +35,7 @@ router.get('/league', async(req, res) => {
         
     } catch (error) {
         return res.status(500).json({
-            error: error.toString()
+            error: error.toString(),
         })
     }
 })
