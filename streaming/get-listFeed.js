@@ -11,10 +11,16 @@ const getListFeed = async( url ) => {
     const $ = cheerio.load(data);
     const objSelector = $('#myTable > tr');
     const listObj = [];
+    const date = []
 
     objSelector.each( ( parentIdObject, value) => {
         $(value).children('td').children('a').each( (parentTdObject, valueSelector) => {
+            const selector = $(valueSelector).find('.elementor-heading-title').text();
+            //
             count += 1;
+            if(selector) {
+                date.push(selector);
+            }
             listObj.push({
                 id         :  count - 1,
                 eventTime  : $(value).find('.matchtime').text(),
@@ -24,8 +30,8 @@ const getListFeed = async( url ) => {
                 eventLinks : $(valueSelector).attr('href')
             });
         });
-      
     });
+    listObj.push(date);
     return listObj;
 };
 

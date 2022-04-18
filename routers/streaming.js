@@ -56,7 +56,7 @@ router.get('/football/:id', async(req, res) => {
     };
 });
 
-router.get('/motogp', async(req, res) => {
+router.get('/motors', async(req, res) => {
     try {
         const data = await getListFeed(urlMotorsports)
         return res.status(200).json({
@@ -71,7 +71,7 @@ router.get('/motogp', async(req, res) => {
     };
 });
 
-router.get('/motogp/:id', async(req, res) => {
+router.get('/motors/:id', async(req, res) => {
     try {
         const id = req.params.id
         const responseData = await dataStreaming(id, urlMotorsports)
@@ -103,6 +103,24 @@ router.get('/f1', async(req, res) => {
         });
     };
 });
+
+
+router.get('/f1/:id', async(req, res) => {
+    try {
+        const id = req.params.id
+        const responseData = await dataStreaming(id, urlF1)
+
+        return res.status(200).json({
+            result: responseData
+        });
+        
+    } catch (error) {
+        return res.status(500).json({
+            error: error.toString()
+        });
+    };
+});
+
 
 
 router.get('/mma', async(req, res) => {

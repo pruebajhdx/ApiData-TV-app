@@ -22,7 +22,7 @@ const getListMma = async( url ) => {
             });
         });    
     }); 
-    
+
     const cleaningDataDate = date.filter( data => data != '');
     const cleaningData = dataEvent.filter( (value) => value.imgSrc);
     cleaningData.push( { date: cleaningDataDate } );
