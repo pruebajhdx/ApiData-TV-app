@@ -1,4 +1,4 @@
-const { filterByLeagues, getListFeed } = require("../streaming/get-listFeed");
+const { filterByLeagues, getListFeed } = require("../controllers/get-listFeed");
 
 const searchWord = async(word, data) => {
     const filterDataSearch = data.filter(values => {

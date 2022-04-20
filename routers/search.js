@@ -2,7 +2,7 @@ const { Router } = require('express');
 const { getListChannel } = require('../channel/get-list-channel');
 const { urlFootball, urlChannels} = require('../constants');
 const { searchWord, searchObjectDict, searchByLeague } = require('../helpers/search');
-const { getListFeed } = require('../streaming/get-listFeed');
+const { getListFeed } = require('../controllers/get-listFeed');
 
 const router = Router();
 

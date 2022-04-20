@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const { getListSports } = require('../streaming/get-list-sport');
-const { dataStreaming, getListFeed, dataReplay, filterByLeagues } = require('../streaming/get-listFeed');
-const { getListMma, getIframeUfc } = require('../streaming/get-mma');
-const { getIframeSports } = require('../streaming/get-list-sport');
+const { getListSports } = require('../controllers/get-list-sport');
+const { dataStreaming, getListFeed, dataReplay, filterByLeagues } = require('../controllers/get-listFeed');
+const { getListMma, getIframeUfc } = require('../controllers/get-mma');
+const { getIframeSports } = require('../controllers/get-list-sport');
 const { urlFootball, 
         urlMotorsports, 
         urlF1, 
