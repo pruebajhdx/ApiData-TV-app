@@ -2,10 +2,13 @@ const { filterByLeagues, getListFeed } = require("../controllers/get-listFeed");
 
 const searchWord = async(word, data) => {
     const filterDataSearch = data.filter(values => {
-        const words = values.name.split(' ')
-        if(words.includes(word)) {
-            return values;
-        }});
+        if( values.name != undefined ) {
+            const words = values.name.split(' ')
+            if(words.includes(word)) {
+                return values;
+            }
+        }
+    });
     return filterDataSearch;
 }
 
