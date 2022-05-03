@@ -17,12 +17,12 @@ const getDataOtherLeague = async ( url ) => {
                 data.push({
                     name: $(valueTr).find("b").text(),
                     type: $(valueTr).children('td:nth-child(2)').children('span').attr('class'),
-                    time: $(valueTr).find(".t").text(),
+                    eventTime: $(valueTr).find(".t").text(),
                     eventLinks: `${pirlo}${$(valueTr).children('td:nth-child(3)').children('a').attr('href')}`
                 })
             });
     });
-    
+
     let count = 0
     const filterByCountry = data.filter( (value) => {
 
