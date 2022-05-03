@@ -29,11 +29,26 @@ const getDataOtherLeague = async ( url ) => {
         if (value.type === 'before co'){
             ++count
             value['id'] = count - 1
+            value['championship'] = 'Liga Betplay'
             return value
         }
 
         if (value.type === 'before pe'){
             ++count
+            value['id'] = count - 1
+            return value
+        }
+
+        if (value.type === 'before lib'){
+            ++count
+            value['id'] = count - 1
+            value['championship'] = 'Copa Libertadores'
+            return value
+        }
+
+        if (value.type === 'before csuda'){
+            ++count
+            value['championship'] = 'Copa Sudamericana'
             value['id'] = count - 1
             return value
         }
