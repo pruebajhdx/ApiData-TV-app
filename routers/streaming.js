@@ -127,11 +127,11 @@ router.get("/motors/:id", async (req, res) => {
 router.get("/f1", async (req, res) => {
     try {
         const data = await getListFeed(urlF1);
-        const replayData = await dataReplay(urlF1);
+        //const replayData = await dataReplay(urlF1);
 
         return res.status(200).json({
             result: data,
-            replayData,
+            //replayData,
         });
     } catch (error) {
         return res.status(500).json({

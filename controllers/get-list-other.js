@@ -39,7 +39,7 @@ const getDataOtherLeague = async ( url ) => {
             return value
         }
 
-        if (value.type === 'before lib'){
+       /*  if (value.type === 'before lib'){
             ++count
             value['id'] = count - 1
             value['championship'] = 'Copa Libertadores'
@@ -51,7 +51,8 @@ const getDataOtherLeague = async ( url ) => {
             value['championship'] = 'Copa Sudamericana'
             value['id'] = count - 1
             return value
-        }
+        } */
+        
     })
 
    return filterByCountry;
