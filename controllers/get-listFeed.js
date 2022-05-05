@@ -31,7 +31,10 @@ const getListFeed = async( url ) => {
             });
         });
     });
-    listObj.push(date);
+
+    if(date.length > 0) {
+        listObj.push(date);
+    }
     return listObj;
 };
 
