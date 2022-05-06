@@ -5,57 +5,15 @@ const { getData } = require("../helpers/get-information");
 
 //Get information F1, FOTBALL AND MOTOGP
 
-const getDateF1 = async ($, obj) => {
-    const objSelector = $("#main");
 
-    objSelector.each((idx, value) => {
-        $(value)
-            .find(".elementor-widget-wrap")
-            .children("div")
-            .each((ide, valueDiv) => {
-                if (
-                    $(valueDiv)
-                        .find(".elementor-widget-container")
-                        .children("h2")
-                        .text() !== ""
-                ) {
-                    obj.push({
-                        date: $(valueDiv)
-                            .find(".elementor-widget-container")
-                            .children("h2")
-                            .text(),
-                    });
-                }
-                $(valueDiv)
-                    .children("div")
-                    .children("table")
-                    .find("tbody")
-                    .children("tr")
-                    .each((idb, valueTr) => {
-                        obj.push({
-                            eventTime: $(valueTr).find(".matchtime").text(),
-                            name: $(valueTr)
-                                .find(".event-title")
-                                .text()
-                                .replace(/(\r\n|\n|\r)/gm, " "),
-                        });
-                    });
-            });
-    });
-};
-
-const getListFeed = async (url, type) => {
+const getListFeed = async (url) => {
     let count = 0;
     const data = await getData(url).then((dataHtml) => dataHtml.data);
     const $ = cheerio.load(data);
     const objSelector = $("#myTable > tr");
     const listObj = [];
     const date = [];
-
-    if( type === 'f1') {
-        getDateF1($, date);
-    }
-
+    
     objSelector.each((parentIdObject, value) => {
         $(value)
             .children("td")

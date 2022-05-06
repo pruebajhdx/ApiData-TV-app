@@ -24,6 +24,7 @@ const {
     getDataOtherLeague,
     getIframePirloTv,
 } = require("../controllers/get-list-other");
+const { getDateF1 } = require("../controllers/get-date-list");
 
 const router = Router();
 
@@ -126,6 +127,22 @@ router.get("/motors/:id", async (req, res) => {
 router.get("/f1", async (req, res) => {
     try {
         const data = await getListFeed(urlF1, "f1");
+        //const replayData = await dataReplay(urlF1);
+
+        return res.status(200).json({
+            result: data,
+            //replayData,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            error: error.toString(),
+        });
+    }
+});
+
+router.get("/f1/date", async (req, res) => {
+    try {
+        const data = await getDateF1(urlF1, "f1");
         //const replayData = await dataReplay(urlF1);
 
         return res.status(200).json({
