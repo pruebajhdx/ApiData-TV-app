@@ -6,7 +6,6 @@ const { getIframeSports } = require("../controllers/get-list-sport");
 const {
     dataStreaming,
     getListFeed,
-    dataReplay,
     filterByLeagues,
 } = require("../controllers/get-listFeed");
 
@@ -20,44 +19,44 @@ const {
     urlBaseball,
     urlPirloTv,
 } = require("../constants");
-const { getDataOtherLeague, getIframePirloTv } = require("../controllers/get-list-other");
 
+const {
+    getDataOtherLeague,
+    getIframePirloTv,
+} = require("../controllers/get-list-other");
 
 const router = Router();
 
-
-router.get("/football/southAmerican", async(req, res) => {
+router.get("/football/southAmerican", async (req, res) => {
     try {
         const data = await getDataOtherLeague(urlPirloTv);
         return res.status(200).json({
-            data
-        })
+            data,
+        });
     } catch (error) {
         return res.status(500).json({
             error: error.toString(),
-        })
+        });
     }
-
 });
 
-router.get("/football/southAmerican/:id", async(req, res) => {
+router.get("/football/southAmerican/:id", async (req, res) => {
     try {
         const id = req.params.id;
         const data = await getIframePirloTv(id, urlPirloTv);
         return res.status(200).json({
-            data
-        })
+            data,
+        });
     } catch (error) {
         return res.status(500).json({
             error: error.toString(),
-        })
+        });
     }
-
 });
 
 router.get("/football", async (req, res) => {
     try {
-        const data = await getListFeed(urlFootball);
+        const data = await getListFeed(urlFootball, null);
         return res.status(200).json({
             result: data,
         });
@@ -98,7 +97,7 @@ router.get("/football/:id", async (req, res) => {
 
 router.get("/motors", async (req, res) => {
     try {
-        const data = await getListFeed(urlMotorsports);
+        const data = await getListFeed(urlMotorsports, null);
         return res.status(200).json({
             result: data,
         });
@@ -126,7 +125,7 @@ router.get("/motors/:id", async (req, res) => {
 
 router.get("/f1", async (req, res) => {
     try {
-        const data = await getListFeed(urlF1);
+        const data = await getListFeed(urlF1, "f1");
         //const replayData = await dataReplay(urlF1);
 
         return res.status(200).json({
