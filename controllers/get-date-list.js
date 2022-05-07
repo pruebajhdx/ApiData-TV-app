@@ -1,13 +1,13 @@
 const cheerio = require("cheerio");
 const { getData } = require("../helpers/get-information");
 
-const getDateF1 = async (url, type ) => {
+const getDateF1 = async (url, type) => {
     const data = await getData(url).then((dataHtml) => dataHtml.data);
     const $ = cheerio.load(data);
     const objSelector = $("#main");
     const obj = [];
 
-    if ( type === 'f1'){
+    if (type === "f1") {
         objSelector.each((idx, value) => {
             $(value)
                 .find(".elementor-widget-wrap")
@@ -19,12 +19,12 @@ const getDateF1 = async (url, type ) => {
                             .children("h2")
                             .text() !== ""
                     ) {
-                        obj.push({
-                            date: $(valueDiv)
+                        obj.push(
+                            $(valueDiv)
                                 .find(".elementor-widget-container")
                                 .children("h2")
-                                .text(),
-                        });
+                                .text()
+                        );
                     }
                     $(valueDiv)
                         .children("div")
@@ -32,22 +32,21 @@ const getDateF1 = async (url, type ) => {
                         .find("tbody")
                         .children("tr")
                         .each((idb, valueTr) => {
-                            obj.push({
-                                eventTime: $(valueTr).find(".matchtime").text(),
-                                name: $(valueTr)
+                            obj.push($(valueTr).find(".matchtime").text());
+                            obj.push(
+                                $(valueTr)
                                     .find(".event-title")
                                     .text()
-                                    .replace(/(\r\n|\n|\r)/gm, " "),
-                            });
+                                    .replace(/(\r\n|\n|\r)/gm, " ")
+                            );
                         });
                 });
         });
     }
-   
-    return obj
+
+    return obj;
 };
 
-
 module.exports = {
-    getDateF1
-}
+    getDateF1,
+};
