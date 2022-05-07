@@ -33,9 +33,7 @@ const getDateF1 = async (url, type) => {
                         .children("tr")
                         .each((idb, valueTr) => {
                             obj.push({
-                                time: $(valueTr).find(".matchtime").text()
-                            });
-                            obj.push({
+                                time: $(valueTr).find(".matchtime").text(),
                                 name:  $(valueTr)
                                 .find(".event-title")
                                 .text()
