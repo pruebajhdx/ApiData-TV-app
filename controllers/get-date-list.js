@@ -19,12 +19,12 @@ const getDateF1 = async (url, type) => {
                             .children("h2")
                             .text() !== ""
                     ) {
-                        obj.push(
-                            $(valueDiv)
+                        obj.push({
+                            date: $(valueDiv)
                                 .find(".elementor-widget-container")
                                 .children("h2")
-                                .text()
-                        );
+                                .text(),
+                        });
                     }
                     $(valueDiv)
                         .children("div")
@@ -32,13 +32,15 @@ const getDateF1 = async (url, type) => {
                         .find("tbody")
                         .children("tr")
                         .each((idb, valueTr) => {
-                            obj.push($(valueTr).find(".matchtime").text());
-                            obj.push(
-                                $(valueTr)
-                                    .find(".event-title")
-                                    .text()
-                                    .replace(/(\r\n|\n|\r)/gm, " ")
-                            );
+                            obj.push({
+                                time: $(valueTr).find(".matchtime").text()
+                            });
+                            obj.push({
+                                name:  $(valueTr)
+                                .find(".event-title")
+                                .text()
+                                .replace(/(\r\n|\n|\r)/gm, " ")
+                            });
                         });
                 });
         });
