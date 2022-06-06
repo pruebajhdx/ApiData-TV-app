@@ -71,7 +71,7 @@ const filterByLeagues = async (data) => {
     Object.entries(listMatchesFootball).forEach((idx) => {
         if (idx[1].imgTitle != undefined) {
             let formatData = idx[1].imgTitle?.split("/");
-            formatData = formatData[7].split(".").slice(0, 1).join();
+            formatData = formatData[7]?.split(".").slice(0, 1).join();
             key.push(formatData);
             if (key.includes(formatData)) {
                 value.push(idx[1].imgTitle.toString());

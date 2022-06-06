@@ -54,7 +54,6 @@ const getDataOtherLeague = async ( url ) => {
         } 
 
     })
-
    return filterByCountry;
 };
 

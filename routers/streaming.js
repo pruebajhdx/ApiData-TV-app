@@ -46,7 +46,7 @@ router.get("/football/southAmerican/:id", async (req, res) => {
         const id = req.params.id;
         const data = await getIframePirloTv(id, urlPirloTv);
         return res.status(200).json({
-            data,
+            result: data,
         });
     } catch (error) {
         return res.status(500).json({
