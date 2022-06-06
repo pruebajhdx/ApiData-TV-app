@@ -25,6 +25,7 @@ const {
     getIframePirloTv,
 } = require("../controllers/get-list-other");
 const { getDateF1 } = require("../controllers/get-date-list");
+const { keyValidate } = require("../helpers/keyValidate");
 
 const router = Router();
 
@@ -32,7 +33,7 @@ router.get("/football/southAmerican", async (req, res) => {
     try {
         const data = await getDataOtherLeague(urlPirloTv);
         return res.status(200).json({
-            data,
+            data: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -46,7 +47,7 @@ router.get("/football/southAmerican/:id", async (req, res) => {
         const id = req.params.id;
         const data = await getIframePirloTv(id, urlPirloTv);
         return res.status(200).json({
-            result: data,
+            result: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -59,7 +60,7 @@ router.get("/football", async (req, res) => {
     try {
         const data = await getListFeed(urlFootball, null);
         return res.status(200).json({
-            result: data,
+            result: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -72,7 +73,7 @@ router.get("/league", async (req, res) => {
     try {
         const data = await filterByLeagues(urlFootball);
         return res.status(200).json({
-            leagueAvailable: data,
+            leagueAvailable: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -87,7 +88,7 @@ router.get("/football/:id", async (req, res) => {
         const responseData = await dataStreaming(id, urlFootball);
 
         return res.status(200).json({
-            result: responseData,
+            result: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
@@ -100,7 +101,7 @@ router.get("/motors", async (req, res) => {
     try {
         const data = await getListFeed(urlMotorsports, null);
         return res.status(200).json({
-            result: data,
+            result: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -115,7 +116,7 @@ router.get("/motors/:id", async (req, res) => {
         const responseData = await dataStreaming(id, urlMotorsports);
 
         return res.status(200).json({
-            result: responseData,
+            result: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
@@ -130,7 +131,7 @@ router.get("/f1", async (req, res) => {
         //const replayData = await dataReplay(urlF1);
 
         return res.status(200).json({
-            result: data,
+            result: keyValidate(req, data)
             //replayData,
         });
     } catch (error) {
@@ -146,7 +147,7 @@ router.get("/f1/date", async (req, res) => {
         //const replayData = await dataReplay(urlF1);
 
         return res.status(200).json({
-            result: data,
+            result: keyValidate(req, data)
             //replayData,
         });
     } catch (error) {
@@ -162,7 +163,7 @@ router.get("/f1/:id", async (req, res) => {
         const responseData = await dataStreaming(id, urlF1);
 
         return res.status(200).json({
-            result: responseData,
+            result: keyValidate(req, responseData),
         });
     } catch (error) {
         return res.status(500).json({
@@ -175,8 +176,7 @@ router.get("/mma", async (req, res) => {
     try {
         const data = await getListMma(urlMMA);
         return res.status(200).json({
-            data,
-            result: "ok",
+            data: keyValidate(req, data),
         });
     } catch (error) {
         return res.status(500).json({
@@ -191,8 +191,7 @@ router.get("/mma/:id", async (req, res) => {
         const responseData = await getIframeUfc(id, urlMMA);
 
         return res.status(200).json({
-            responseData,
-            result: "ok",
+            responseData: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
@@ -206,7 +205,7 @@ router.get("/nba", async (req, res) => {
         const selector = "#post-3094 > div > div > div > div > div";
         const data = await getListSports(selector, urlNBA);
         return res.status(200).json({
-            data,
+            data: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -222,8 +221,7 @@ router.get("/nba/:id", async (req, res) => {
         const responseData = await getIframeSports(id, selector, urlNBA);
 
         return res.status(200).json({
-            responseData,
-            result: "ok",
+            responseData: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
@@ -237,7 +235,7 @@ router.get("/boxing/", async (req, res) => {
         const selector = "#post-3103 > div > div > div > div > div";
         const data = await getListSports(selector, urlBoxing);
         return res.status(200).json({
-            data,
+            data: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -253,8 +251,7 @@ router.get("/boxing/:id", async (req, res) => {
         const responseData = await getIframeSports(id, selector, urlBoxing);
 
         return res.status(200).json({
-            responseData,
-            result: "ok",
+            responseData: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
@@ -269,8 +266,7 @@ router.get("/baseball/", async (req, res) => {
         const data = await getListSports(selector, urlBaseball);
 
         return res.status(200).json({
-            data,
-            result: "ok",
+            data: keyValidate(req, data)
         });
     } catch (error) {
         return res.status(500).json({
@@ -286,8 +282,7 @@ router.get("/baseball/:id", async (req, res) => {
         const responseData = await getIframeSports(id, selector, urlBaseball);
 
         return res.status(200).json({
-            responseData,
-            result: "ok",
+            responseData: keyValidate(req, responseData)
         });
     } catch (error) {
         return res.status(500).json({
