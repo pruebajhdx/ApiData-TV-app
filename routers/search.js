@@ -3,6 +3,7 @@ const { getListChannel } = require('../channel/get-list-channel');
 const { urlFootball, urlChannels} = require('../constants');
 const { searchWord, searchObjectDict, searchByLeague } = require('../helpers/search');
 const { getListFeed } = require('../controllers/get-listFeed');
+const { keyValidate } = require('../helpers/keyValidate');
 
 const router = Router();
 
@@ -17,7 +18,7 @@ router.get('/football/:keyword', async(req, res) => {
         }
 
         return res.status(200).json({
-            reponse: result 
+            reponse: keyValidate(req, result) 
         });
     } catch (error) {
         return res.status(500).json({

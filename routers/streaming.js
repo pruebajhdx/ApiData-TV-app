@@ -26,6 +26,7 @@ const {
 } = require("../controllers/get-list-other");
 const { getDateF1 } = require("../controllers/get-date-list");
 const { keyValidate } = require("../helpers/keyValidate");
+const { getMotoSport, dataMotoSport } = require("../controllers/get-motorsport");
 
 const router = Router();
 
@@ -99,7 +100,7 @@ router.get("/football/:id", async (req, res) => {
 
 router.get("/motors", async (req, res) => {
     try {
-        const data = await getListFeed(urlMotorsports, null);
+        const data = await getMotoSport(urlMotorsports, null);
         return res.status(200).json({
             result: keyValidate(req, data)
         });
@@ -113,7 +114,7 @@ router.get("/motors", async (req, res) => {
 router.get("/motors/:id", async (req, res) => {
     try {
         const id = req.params.id;
-        const responseData = await dataStreaming(id, urlMotorsports);
+        const responseData = await dataMotoSport(id, urlMotorsports);
 
         return res.status(200).json({
             result: keyValidate(req, responseData)

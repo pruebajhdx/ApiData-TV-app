@@ -13,6 +13,10 @@ const getListMma = async( url ) => {
    
     objSelector.each( (idx, objValue) => {
         $(objValue).children('section').each( (ids, valueSection) => {
+            console.log($(valueSection).html())
+            /* if(ids >= 1){
+                console.log($(valueSection).find('.elementor-widget-container').children('h2').text())
+            } */
             date.push($(valueSection).find('.elementor-heading-title').text());
             dataEvent.push({
                 imgSrc: $(valueSection).find('.aligncenter').attr('src'),
